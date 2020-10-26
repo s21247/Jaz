@@ -1,0 +1,4 @@
+rootProject.name = 'jaz1'
+
+include ':app'
+
