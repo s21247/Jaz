@@ -15,19 +15,19 @@ public class LoginTest {
     @BeforeClass
     public static void beforeClass()  {
         given()
-                .body(new RegisterRequest("wojtek", "wojtek2"))
+                .body(new RegisterRequest("wojtek", "wojtek2","wojtek","Piorecki"))
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/api/register")
                 .thenReturn();
         given()
-                .body(new RegisterRequest("adam", "adam2"))
+                .body(new RegisterRequest("adam", "adam2","adam","Kaluza"))
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/api/register")
                 .thenReturn();
         given()
-                .body(new RegisterRequest("dominik", "dominik2"))
+                .body(new RegisterRequest("dominik", "dominik2","dominik","Pasymowski"))
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/api/register")
@@ -64,18 +64,18 @@ public class LoginTest {
                 .contentType(ContentType.JSON)
                 .post("/api/login")
                 .then()
-                .statusCode(HttpStatus.UNAUTHORIZED.value());
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
     @Test
-    public void tryToLogInNotRegisteredUserReturns401() {
+    public void tryToLogInNotRegisteredUserReturns500() {
         given()
                 .when()
                 .body(new LoginRequest("michal", "pawelczak"))
                 .contentType(ContentType.JSON)
                 .post("/api/login")
                 .then()
-                .statusCode(HttpStatus.UNAUTHORIZED.value());
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
     @Test
@@ -118,7 +118,7 @@ public class LoginTest {
                 .thenReturn();
         given()
                 .cookies(response.getCookies())
-                .body(new RegisterRequest("adam", "adam2"))
+                .body(new RegisterRequest("adam", "adam2","adam","Kaluza"))
                 .contentType(ContentType.JSON)
                 .post("/api/Granted")
                 .then()
@@ -136,7 +136,7 @@ public class LoginTest {
                 .thenReturn();
         given()
                 .cookies(response.getCookies())
-                .body(new RegisterRequest("adam", "adam2"))
+                .body(new RegisterRequest("adam", "adam2","adam","Kaluza"))
                 .contentType(ContentType.JSON)
                 .post("/api/Granted")
                 .then()
@@ -168,7 +168,7 @@ public class LoginTest {
                 .thenReturn();
         given()
                 .cookies(response.getCookies())
-                .body(new RegisterRequest("adam", "adam2"))
+                .body(new RegisterRequest("adam", "adam2","adam","Kaluza"))
                 .contentType(ContentType.JSON)
                 .post("/api/Granted")
                 .thenReturn();
@@ -195,7 +195,7 @@ public class LoginTest {
                 .thenReturn();
         given()
                 .cookies(response.getCookies())
-                .body(new RegisterRequest("", ""))
+                .body(new RegisterRequest("", "","",""))
                 .contentType(ContentType.JSON)
                 .post("/api/Granted")
                 .then()

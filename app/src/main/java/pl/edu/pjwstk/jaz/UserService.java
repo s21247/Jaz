@@ -20,12 +20,15 @@ public class UserService {
     }
 
     @Transactional
-    public void saveUser(String username, String password, Set<String> authorities) {
+    public void saveUser(String username, String password, Set<String> authorities,
+                         String firstName, String lastName) {
         var userEntity = new UserEntity();
         userEntity.setUsername(username);
         password = passwordEncoder.encode(password);
         userEntity.setPassword(password);
         userEntity.setAuthorities(authorities);
+        userEntity.setFirstName(firstName);
+        userEntity.setLastName(lastName);
         entityManager.persist(userEntity);
         if(userEntity.getId() == 1) {
             authorities.add("Admin");

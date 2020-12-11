@@ -1,7 +1,10 @@
 CREATE TABLE users (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     username VARCHAR NOT NULL,
-    password VARCHAR NOT NULL
+    password VARCHAR NOT NULL,
+    firstName VARCHAR NOT NULL,
+    lastName VARCHAR NOT NULL
+
 );
 
 CREATE TABLE authorities(

@@ -18,6 +18,25 @@ public class UserEntity {
     @Column(unique = true)
     private String username;
     private String password;
+    private String firstName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    private String lastName;
 //    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 //    @JoinTable(
 //            name = "users_authorities",

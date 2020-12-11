@@ -8,12 +8,17 @@ public class User {
     private final String username;
     private final String password;
     private final Set<String> authorities;
+    private final String firstName;
+    private final String lastName;
 
-    public User(String username, String password, Set<String> authorities) {
+    public User(String username, String password, Set<String> authorities, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
+
 
     public String getUsername() {
         return username;

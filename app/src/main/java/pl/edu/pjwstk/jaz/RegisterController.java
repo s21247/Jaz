@@ -40,7 +40,8 @@ public class  RegisterController {
        // User user = new User(registerRequest.getUsername(),registerRequest.getPassword(),authorities);
         //users.put(registerRequest.getUsername(),user);
 
-        userService.saveUser(registerRequest.getUsername(),registerRequest.getPassword(),authorities);
+        userService.saveUser(registerRequest.getUsername(),registerRequest.getPassword(),authorities,
+                registerRequest.getFirstName(),registerRequest.getLastName());
 
     }
 }
