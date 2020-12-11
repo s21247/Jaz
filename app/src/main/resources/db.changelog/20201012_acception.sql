@@ -1,0 +1,9 @@
+-- CREATE TABLE uzytkownik(
+--
+-- );
+-- CREATE TABLE dzialy(
+--
+-- );
+-- CREATE TABLE kategorie(
+--
+-- );

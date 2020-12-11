@@ -1,5 +1,7 @@
 package pl.edu.pjwstk.jaz;
 
+import java.util.Collections;
+
 public class RegisterRequest {
 
     private final String username;
@@ -17,5 +19,10 @@ public class RegisterRequest {
     public String getPassword() {
         return password;
     }
+
+
+
+
+
 
 }

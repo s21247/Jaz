@@ -12,7 +12,7 @@ public class ExampleController {
     private final ExampleService exampleService;
 
 
-    //todo tu jest klopot
+    //tu jest klopot
     @Autowired
     public ExampleController(ExampleService exampleService) {
         this.exampleService = exampleService;

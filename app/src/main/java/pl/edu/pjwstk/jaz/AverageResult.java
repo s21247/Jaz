@@ -1,5 +1,7 @@
 package pl.edu.pjwstk.jaz;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import java.math.BigDecimal;
 
 public class AverageResult {

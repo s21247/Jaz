@@ -1,6 +1,5 @@
 package pl.edu.pjwstk.jaz;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +12,7 @@ public class LoginController {
         this.authenticationService = authenticationService;
     }
 
+
     @PostMapping("/login")
     public void login(@RequestBody LoginRequest loginRequest) {
         //todo uwierzytelnic
@@ -21,5 +21,10 @@ public class LoginController {
             throw new UnauthorizedException();
         }
 
+        //todo login z auth0
+        //todo testy
+        //sprawdzic filtr
     }
+
 }
+

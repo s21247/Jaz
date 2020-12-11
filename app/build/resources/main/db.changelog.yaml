@@ -1,9 +1,33 @@
 databaseChangeLog:
+#  - changeSet:
+#      id: 20201012_init.sql
+#      author: Wojciech Piorecki
+#      sqlFile:
+#        relativeToChangelogFile: true
+#        stripComments: true
+#        splitStatements: false
+#        path: db.changelog/20201012_init.sql
   - changeSet:
-      id: 20201012_init.sql
+      id: 20201201_add_users
       author: Wojciech Piorecki
       sqlFile:
         relativeToChangelogFile: true
         stripComments: true
         splitStatements: false
-        path: db.changelog/20201012_init.sql
+        path: db.changelog/20201201_add_users.sql
+  - changeSet:
+      id: 20201207_users_authentication.sql
+      author: Wojciech Piorecki
+      sqlFile:
+        relativeToChangelogFile: true
+        stripComments: true
+        splitStatements: false
+        path: db.changelog/20201207_users_authentication.sql
+  - changeSet:
+      id: 20201207_users.sql
+      author: Wojciech Piorecki
+      sqlFile:
+        relativeToChangelogFile: true
+        stripComments: true
+        splitStatements: false
+        path: db.changelog/20201207_users.sql

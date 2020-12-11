@@ -7,6 +7,13 @@ public class User {
 
     private final String username;
     private final String password;
+    private final Set<String> authorities;
+
+    public User(String username, String password, Set<String> authorities) {
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+    }
 
     public String getUsername() {
         return username;
@@ -16,14 +23,13 @@ public class User {
         return password;
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 
     public Set<String> getAuthorities() {
-
-        return null;
-       // return getAuthorities();
+        return authorities;
     }
+
+    public void updatedAuthority(String authorities) {
+        this.authorities.add(authorities);
+    }
+
 }

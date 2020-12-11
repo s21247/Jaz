@@ -30,13 +30,11 @@ public class ExampleFilter extends HttpFilter {
     }
 
     private boolean isSiteAllowed(HttpServletRequest request) {
-        // return request.getContextPath().equals(...) || request.getContextPath().equals(...);
-        return false;
+         return request.getContextPath().equals("/login") || request.getContextPath().equals("/register");
     }
 
     private boolean isUserLogged() {
        return userSession.isLoggedIn();
-        //return false;
     }
 
 
