@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.pjwstk.jaz.controller.RegisterController;
+import pl.edu.pjwstk.jaz.entity.UserService;
+import pl.edu.pjwstk.jaz.request.RegisterRequest;
 
 import javax.persistence.EntityManager;
 import java.util.Set;
