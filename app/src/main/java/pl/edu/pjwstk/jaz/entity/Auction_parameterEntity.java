@@ -15,7 +15,7 @@ public class Auction_parameterEntity {
     @JoinColumn(name = "parameter_id")
     private ParameterEntity parameterEntity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("auction_id")
     @JoinColumn(name = "auction_id")
     private AuctionEntity auctionEntity;

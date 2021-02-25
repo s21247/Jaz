@@ -13,6 +13,11 @@ public class CategoryRequest {
     public CategoryRequest() {
     }
 
+    public CategoryRequest(String title, String sectionTitle) {
+        this.title = title;
+        this.sectionTitle = sectionTitle;
+    }
+
     public String getSectionTitle() {
         return sectionTitle;
     }

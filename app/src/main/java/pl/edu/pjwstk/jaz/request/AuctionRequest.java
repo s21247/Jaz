@@ -15,15 +15,21 @@ public class AuctionRequest {
 
     private String owner;
 
-    public AuctionRequest() {
-    }
 
-    public AuctionRequest(String description, int price, String title, Long version) {
+    public AuctionRequest(String description, int price, String title, Long version, List<PhotoRequest> photo, List<ParameterRequest> parameter,
+                          String category) {
         this.description = description;
         this.price = price;
         this.title = title;
         this.version = version;
+        this.photo = photo;
+        this.parameter = parameter;
+        this.category = category;
     }
+
+    public AuctionRequest() {
+    }
+
 
     public String getOwner() {
         return owner;

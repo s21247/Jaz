@@ -1,12 +1,15 @@
 package pl.edu.pjwstk.jaz.entity;
 
 import org.springframework.stereotype.Repository;
+
+import pl.edu.pjwstk.jaz.BadRequestException;
+import pl.edu.pjwstk.jaz.UnauthorizedException;
 import pl.edu.pjwstk.jaz.controller.LoginController;
 import pl.edu.pjwstk.jaz.request.AuctionRequest;
 import pl.edu.pjwstk.jaz.request.ParameterRequest;
 import pl.edu.pjwstk.jaz.request.PhotoRequest;
-
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,14 +53,22 @@ public class AuctionService {
     }
 
     @Transactional
-    public void updateAuction(AuctionRequest auctionRequest, Long id) throws Exception {
-        var auctionEntity = findAuctionByOwnerId(id);
+    public void updateAuction(AuctionRequest auctionRequest, Long id)  {
+        var auctionEntity = findAuctionById(id);
         if (auctionEntity.getUserEntity().getUsername().equals(loginController.getController())) {
             try {
-                auctionEntity.setDescription(auctionRequest.getDescription());
-                auctionEntity.setPrice(auctionRequest.getPrice());
-                auctionEntity.setTitle(auctionRequest.getTitle());
+                if(auctionRequest.getCategory() != null) {
+                    auctionEntity.setDescription(auctionRequest.getDescription());
+                }
+                if(auctionRequest.getPrice() != 0) {
+                    auctionEntity.setPrice(auctionRequest.getPrice());
+                }
+                if(auctionRequest.getTitle() != null) {
+                    auctionEntity.setTitle(auctionRequest.getTitle());
+                }
+                if(auctionRequest.getVersion() != 0)
                 auctionEntity.setVersion(auctionEntity.getVersion() + 1);
+
                 var categoryEntity = sectionService.findCategoryByTitle(auctionRequest.getCategory());
                 auctionEntity.setCategoryEntity(categoryEntity);
                 var userEntity = new UserEntity();
@@ -69,13 +80,13 @@ public class AuctionService {
                 for(Auction_parameterEntity y : addParameterToAuction(auctionRequest.getParameter(),auctionEntity)) {
                     entityManager.persist(y);
                 }
-                entityManager.merge(auctionEntity);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+              if(auctionEntity.getVersion().equals(auctionRequest.getVersion()))
+                  entityManager.merge(auctionEntity);
+            }catch (NoResultException e) {
+                throw new BadRequestException();
             }
-
         } else
-            System.out.println("Zly uzytkownik zalogowany");
+            throw new UnauthorizedException();
 
 
     }
@@ -91,6 +102,7 @@ public class AuctionService {
         auctionRequest.setVersion(auctionEntity.getVersion());
         auctionRequest.setTitle(auctionEntity.getTitle());
         List<PhotoRequest> photoRequestList = new ArrayList<>();
+//        photoRequestList.add(new PhotoRequest(getPicture(id).getLink(),getPicture(id).getOrder()));
         for(PhotoEntity x : auctionEntity.getPhotoEntityList()) {
             var photoRequest = new PhotoRequest(x.getLink(),x.getOrder());
             photoRequestList.add(photoRequest);
@@ -162,6 +174,18 @@ public class AuctionService {
 
     public List<AuctionEntity> getAllAuctions () {
         return entityManager.createQuery("select auction from AuctionEntity auction",AuctionEntity.class)
+                .getResultList();
+    }
+
+    public PhotoEntity getPicture(Long id) {
+        return entityManager.createQuery("select photo from PhotoEntity photo where photo.auctionEntity.id = :id AND photo.order = 1" , PhotoEntity.class)
+                .setParameter("id",id)
+                .getSingleResult();
+
+    }
+
+    public List<AuctionView> getAuctionWithMiniature() {
+        return entityManager.createQuery("select view from AuctionView view ",AuctionView.class)
                 .getResultList();
     }
 

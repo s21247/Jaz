@@ -15,6 +15,8 @@ public class AuctionEntity {
     private String title;
     private String description;
     private int price;
+
+    @Version
     private Long version;
 
     @ManyToOne

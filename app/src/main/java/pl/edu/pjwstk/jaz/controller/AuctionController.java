@@ -2,7 +2,10 @@ package pl.edu.pjwstk.jaz.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+import pl.edu.pjwstk.jaz.BadRequestException;
 import pl.edu.pjwstk.jaz.entity.AuctionService;
+import pl.edu.pjwstk.jaz.entity.AuctionView;
 import pl.edu.pjwstk.jaz.request.AuctionRequest;
 
 import java.util.List;
@@ -24,9 +27,10 @@ public class AuctionController {
     }
 
     @PreAuthorize("hasAnyAuthority('Admin,User')")
-    @PostMapping("/updateAuction/{id}")
-    public void updateAuction(@RequestBody AuctionRequest auctionRequest, @PathVariable(name = "id") Long id) throws Exception {
+    @PutMapping("/updateAuction/{id}")
+    public void updateAuction(@RequestBody AuctionRequest auctionRequest, @PathVariable(name = "id") Long id) throws BadRequestException {
         auctionService.updateAuction(auctionRequest,id);
+
     }
 
     @PreAuthorize("hasAnyAuthority('Admin,User')")
@@ -41,6 +45,13 @@ public class AuctionController {
     public List<AuctionRequest> viewAllAuction() {
 
         return auctionService.viewAllAuctions();
+    }
+
+    @PreAuthorize("hasAnyAuthority('Admin,User')")
+    @GetMapping("/viewAuctionWithMiniature")
+    public List<AuctionView> viewAuctionWithMiniature() {
+
+        return auctionService.getAuctionWithMiniature();
     }
 
 
